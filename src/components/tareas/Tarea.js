@@ -18,7 +18,7 @@ const Tarea = ({tarea}) => {
                 <button
                   type="button"
                   className="incompleto"
-                  >Incmpleto</button>
+                  >Incompleto</button>
               )
           }
       </div>
