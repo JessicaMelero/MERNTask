@@ -41,6 +41,7 @@ const TareaState = props => {
 
   // Agregar tarea al proyecto seleccionado
   const agregarTarea = tarea => {
+    console.log(tarea)
     dispatch({
       type:AGREGAR_TAREA,
       payload: tarea
