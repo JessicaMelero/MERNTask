@@ -1,6 +1,11 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useContext} from 'react';
+import proyectoContext from '../../context/proyectos/proyectoContext';
 
 const NuevoProyecto = ({}) => {
+
+  // Obtener state del formulario
+  const proyectosContext = useContext(proyectoContext);
+  const {formulario} = proyectosContext;
 
   // State para proyecto
   const [proyecto, guardarProyecto] = useState({
@@ -27,7 +32,7 @@ const NuevoProyecto = ({}) => {
     // Agregar al state
 
     // Reiniciar el from
-    
+
   }
 
   return (
@@ -37,25 +42,30 @@ const NuevoProyecto = ({}) => {
         className="btn btn-block btn-primario"
         >Nuevo proyecto
       </button>
-
-      <form
-        className="formulario-nuevo-proyecto"
-        onSubmit={onsubmitProyecto}
-        >
-        <input
-          type="text"
-          className="input-text"
-          placeholder="Nombre del proyecto"
-          name="nombre"
-          value={nombre}
-          onChange={onChangeProyecto}
-          />
-          <input
-            type="submit"
-            className="btn btn-primario btn-block"
-            value="Agregar proyecto"
+      {
+        formulario
+        ?
+        (
+          <form
+            className="formulario-nuevo-proyecto"
+            onSubmit={onsubmitProyecto}
+            >
+            <input
+              type="text"
+              className="input-text"
+              placeholder="Nombre del proyecto"
+              name="nombre"
+              value={nombre}
+              onChange={onChangeProyecto}
             />
-      </form>
+            <input
+              type="submit"
+              className="btn btn-primario btn-block"
+              value="Agregar proyecto"
+            />
+          </form>
+        ) : null
+      }
       </Fragment>
   );
 }
