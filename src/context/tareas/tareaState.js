@@ -22,7 +22,8 @@ const TareaState = props => {
       {nombre:"Elegir plataforma", estado: true, proyectoId: 2},
       {nombre:"Elegir colores", estado: false,  proyectoId: 3},
       {nombre:"Elegir hosting", estado: false,  proyectoId: 1},
-    ]
+    ],
+    tareasproyecto: null
   }
   // Crear dispatch y state
   const [state, dispatch] = useReducer(TareaReducer, initialState);
@@ -36,10 +37,12 @@ const TareaState = props => {
       payload: proyectoId
     })
   }
+
   return(
     <TareaContext.Provider
       value={{
         tareas: state.tareas,
+        tareasproyecto: state.tareasproyecto,
         obtenerTareas
       }}
     >

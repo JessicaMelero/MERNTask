@@ -11,6 +11,7 @@ const Proyecto = ({proyecto}) => {
   // Obtener la funcion del context de tarea
   const tareasContext = useContext(tareaContext);
   const {obtenerTareas} = tareasContext;
+  
   // Funcion para agregar proyecto actual
   const seleccionarProyecto = id => {
     proyectoActual(id) // Fijar proyecto actual
