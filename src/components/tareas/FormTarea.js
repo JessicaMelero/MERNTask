@@ -10,7 +10,7 @@ const FormTarea = () => {
 
   // Obtener la funcion del context de tarea
   const tareasContext = useContext(tareaContext);
-  const {errortarea, tareaseleccionada, agregarTarea, validarTarea, obtenerTareas} = tareasContext;
+  const {errortarea, tareaseleccionada, agregarTarea, validarTarea, obtenerTareas, actualizarTarea} = tareasContext;
 
   // Effect que detecta si hay una tarea seleccionada
   useEffect (() => {
@@ -54,10 +54,16 @@ const FormTarea = () => {
       return;
     }
 
-    // agregar nueva tarea al state de tareas
-    tarea.proyectoId = proyectoActual.id;
-    tarea.estado = false;
-    agregarTarea(tarea);
+    // Revisa si es edicion o nueva tarea
+    if (tareaseleccionada === null) {
+      // agregar nueva tarea al state de tareas
+      tarea.proyectoId = proyectoActual.id;
+      tarea.estado = false;
+      agregarTarea(tarea);
+    } else {
+      // actualizar tarea existente
+      actualizarTarea(tarea);
+    }
 
     // Obtener y filtrar tareas de proyecto proyecto actual
     obtenerTareas(proyectoActual.id);
@@ -87,7 +93,7 @@ const FormTarea = () => {
           <input
             type="submit"
             className="btn btn-primario btn-submit btn-block"
-            value={tareaseleccionada ? "Editar tarea" : "Agregar tarea"} 
+            value={tareaseleccionada ? "Editar tarea" : "Agregar tarea"}
             />
         </div>
       </form>
