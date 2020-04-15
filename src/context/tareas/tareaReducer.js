@@ -5,7 +5,8 @@ import {
   ELIMINAR_TAREA,
   ESTADO_TAREA,
   TAREA_ACTUAL,
-  ACTUALIZAR_TAREA
+  ACTUALIZAR_TAREA,
+  LIMPIAR_TAREA
 } from '../../types';
 
 
@@ -37,11 +38,17 @@ export default (state, action) => {
       return {
         ...state,
         tareas: state.tareas.map(tarea => tarea.id === action.payload.id ? action.payload : tarea)
+        // Otra manera de limpiar el state de tarea seleccionada -> tareaseleccionada: null
       }
     case TAREA_ACTUAL:
       return {
         ...state,
         tareaseleccionada: action.payload
+      }
+    case LIMPIAR_TAREA:
+      return{
+        ...state,
+        tareaseleccionada: null
       }
     default:
       return state;
