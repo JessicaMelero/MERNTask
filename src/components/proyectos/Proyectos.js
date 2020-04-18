@@ -8,7 +8,7 @@ import AuthContext from '../../context/autenticacion/authContext';
 const Proyectos = () => {
 
   // Extraer la informacion de autenticacion
-  const authContext = useContext(AuthContext);
+const authContext = useContext(AuthContext);
   const {usuarioAutenticado} = authContext;
 
   useEffect(() => {
