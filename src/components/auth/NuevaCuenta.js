@@ -4,14 +4,14 @@ import AlertaContext from '../../context/alertas/alertaContext';
 import AuthContext from '../../context/autenticacion/authContext';
 
 const NuevaCuenta = (props) => {
-      // Extraer lso valores de context
-      const alertaContext = useContext(AlertaContext);
-      const {alerta, mostrarAlerta} = alertaContext;
+  // Extraer lso valores de context
+  const alertaContext = useContext(AlertaContext);
+  const {alerta, mostrarAlerta} = alertaContext;
 
-      const authContext = useContext(AuthContext);
-      const {mensaje, autenticado, registrarUsuario} = authContext;
+  const authContext = useContext(AuthContext);
+  const {mensaje, autenticado, registrarUsuario} = authContext;
 
-      // En caso de usuario autenticado, regitrado o duplicado
+  //En caso de usuario autenticado, regitrado o duplicado
       useEffect(() => {
         if (autenticado) {
           props.history.push('/proyectos');
@@ -22,12 +22,7 @@ const NuevaCuenta = (props) => {
       }, [mensaje, autenticado, props.history]);
 
       // state para iniciar sesion
-      const [usuario, guardarUsuario] = useState({
-        nombre: '',
-        email: '',
-        password: '',
-        confirmar: ''
-      });
+      const [usuario, guardarUsuario] = useState({nombre: '', email: '', password: '', confirmar: ''});
 
       // extraer de usuario
       const {nombre, email, password, confirmar} = usuario;

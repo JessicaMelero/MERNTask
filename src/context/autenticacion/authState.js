@@ -2,6 +2,7 @@ import React, {useReducer} from 'react';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
 import clienteAxios from '../../config/axios';
+import tokenAuth from '../../config/tokenAuth';
 
 import {
   REGISTRO_EXITOSO,
@@ -32,6 +33,8 @@ const AuthState = props => {
           type:REGISTRO_EXITOSO,
           payload: respuesta.data
         })
+        // Obtener el usuario
+        usuarioAutenticado();
       } catch (error) {
         // console.log(error.response.data.msg);
         const alerta = {
@@ -46,6 +49,54 @@ const AuthState = props => {
       }
     }
 
+    // Devuelve el usuario registrado
+    const usuarioAutenticado = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        // Funcion para enviar el token por headers
+        tokenAuth(token);
+      }
+      try {
+        const respuesta = await clienteAxios.get('/api/auth');
+        // console.log(respuesta);
+        dispatch({
+          type: OBTENER_USUARIO,
+          payload: respuesta.data.usuario
+        });
+      } catch (error) {
+        console.log(error.response);
+        dispatch({
+          type:LOGIN_ERROR
+        })
+      }
+    }
+
+    // Cuando el usuario inicia sesion
+    const iniciarSesion = async datos =>{
+      try {
+        const respuesta = await clienteAxios.post('/api/auth', datos);
+        console.log(respuesta);
+
+        dispatch({
+          type:LOGIN_EXITOSO,
+          payload: respuesta.data
+        });
+        // Obtener usuario
+        usuarioAutenticado();
+      } catch (error) {
+        console.log(error.response.data.msg);
+        const alerta = {
+          msg: error.response.data.msg,
+          categoria: 'alerta-error'
+        }
+
+        dispatch({
+          type: LOGIN_ERROR,
+          payload: alerta
+        })
+      }
+    }
+
     return(
       <AuthContext.Provider
         value={{
@@ -53,7 +104,9 @@ const AuthState = props => {
           autenticado: state.autenticado,
           usuario: state.usuario,
           mensaje: state.mensaje,
-          registrarUsuario
+          registrarUsuario,
+          iniciarSesion,
+          usuarioAutenticado
         }}
       >{props.children}</AuthContext.Provider>
   )
