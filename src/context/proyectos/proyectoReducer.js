@@ -15,6 +15,7 @@ export default (state, action) => {
           formulario: true
         }
       case OBTENER_PROYECTO:
+      console.log(action.payload);
         return {
           ...state,
           proyectos: action.payload

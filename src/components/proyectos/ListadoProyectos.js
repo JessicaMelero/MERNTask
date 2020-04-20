@@ -14,7 +14,7 @@ const ListadoProyectos = ({}) => {
   useEffect(() => {
     obtenerProyectos();
     // eslint-disabled-next-line
-    
+
   },[])
 
   // Revisar si proyectos tienen contenido
@@ -25,7 +25,7 @@ const ListadoProyectos = ({}) => {
       <TransitionGroup>
         {proyectos.map(proyecto=>(
           <CSSTransition
-            key={proyecto.id}
+            key={proyecto._id}
             timeout={200}
             classNames='proyecto'
             >
