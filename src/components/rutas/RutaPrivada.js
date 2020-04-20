@@ -6,16 +6,23 @@ import PropTypes from 'prop-types';
 const RutaPrivada = ({component: Component, ...props}) => {
 
   const authContext = useContext(AuthContext);
-  const {autenticado} = authContext;
+  const {autenticado, cargando, usuarioAutenticado} = authContext;
 
-  return (
-    <Route
-    {...props} render={props => !autenticado ? (
-      <Redirect to="/"/>
-    ) : (
-      <Component {...props} />
-    )}/>
-  );
-}
+  useEffect(()=>{
+    usuarioAutenticado();
+  }, [])
 
+  if(cargando){
+    return <p>Cargando...</p>
+  }else {
+    return (
+      <Route
+       {...props} render={props => !autenticado && !cargando ? (
+         <Redirect to="/"/>
+       ) : (
+         <Component {...props} />
+       )}/>
+    )
+  }
+};
 export default RutaPrivada;

@@ -14,12 +14,14 @@ export default (state, action) => {
       localStorage.setItem('token', action.payload.token);
       return {
         ...state,
+        cargando: false,
         autenticado: true,
         mensaje: null
       }
     case OBTENER_USUARIO:
       return {
         ...state,
+        cargando: false,
         autenticado: true,
         usuario: action.payload
       }
@@ -30,6 +32,7 @@ export default (state, action) => {
       return {
         ... state,
         token: null,
+        cargando: false,
         usuario: null,
         autenticado: null,
         mensaje: action.payload
