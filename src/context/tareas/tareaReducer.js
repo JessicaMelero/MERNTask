@@ -3,7 +3,6 @@ import {
   AGREGAR_TAREA,
   VALIDAR_TAREA,
   ELIMINAR_TAREA,
-  ESTADO_TAREA,
   TAREA_ACTUAL,
   ACTUALIZAR_TAREA,
   LIMPIAR_TAREA
@@ -34,10 +33,9 @@ export default (state, action) => {
         tareasproyecto: state.tareasproyecto.filter(tarea => tarea._id !== action.payload)
       }
     case ACTUALIZAR_TAREA:
-    case ESTADO_TAREA:
       return {
         ...state,
-        tareasproyecto: state.tareasproyecto.map(tarea => tarea.id === action.payload.id ? action.payload : tarea)
+        tareasproyecto: state.tareasproyecto.map(tarea => tarea._id === action.payload._id ? action.payload : tarea)
         // Otra manera de limpiar el state de tarea seleccionada -> tareaseleccionada: null
       }
     case TAREA_ACTUAL:

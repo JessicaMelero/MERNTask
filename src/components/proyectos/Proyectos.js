@@ -13,6 +13,8 @@ const authContext = useContext(AuthContext);
 
   useEffect(() => {
     usuarioAutenticado();
+    // eslint-disable-next-line
+    
   },[]);
 
   return (
