@@ -6,6 +6,7 @@ import proyectoReducer from './proyectoReducer';
 // Types
 import {
   FORMULARIO_PROYECTO,
+  PROYECTO_ERROR,
   OBTENER_PROYECTO,
   AGREGAR_PROYECTO,
   VALIDAR_FORMULARIO,
@@ -22,7 +23,8 @@ const ProyectoState = props => {
     proyectos : [],
     formulario: false,
     errorformulario: false,
-    proyecto: null
+    proyecto: null,
+    mensaje: null
   }
 
   // Dispatch para ejecutar las acciones
@@ -47,6 +49,14 @@ const ProyectoState = props => {
       })
     } catch (error) {
       console.log(error);
+      const alerta = {
+        msg: 'Hubo un error',
+        categoria: 'alerta-error'
+      }
+      dispatch({
+        type: PROYECTO_ERROR,
+        payload: alerta
+      })
     }
   }
 
@@ -62,6 +72,14 @@ const ProyectoState = props => {
       })
     } catch (error) {
       console.log(error);
+      const alerta = {
+        msg: 'Hubo un error',
+        categoria: 'alerta-error'
+      }
+      dispatch({
+        type: PROYECTO_ERROR,
+        payload: alerta
+      })
     }
 
   }
@@ -91,6 +109,14 @@ const ProyectoState = props => {
       })
     } catch (error) {
       console.log(error);
+      const alerta = {
+        msg: 'Hubo un error',
+        categoria: 'alerta-error'
+      }
+      dispatch({
+        type: PROYECTO_ERROR,
+        payload: alerta
+      })
     }
   }
 
@@ -101,6 +127,7 @@ const ProyectoState = props => {
           formulario: state.formulario,
           errorformulario: state.errorformulario,
           proyecto: state.proyecto,
+          mensaje: state.mensaje,
           mostrarFormulario,
           obtenerProyectos,
           agregarProyecto,
